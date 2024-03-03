@@ -18,13 +18,15 @@ namespace EntryWithWDT
     {
         public MainPageBindingContext()
         {
+            _wdtOverlay = new WatchdogTimer { Interval = TimeSpan.FromSeconds(2.5) };            
+            _wdtOverlay.Cancelled += (sender, e) =>
+            {
+                OverlayVisible = false;
+                IsEntryEnabled = true;
+            };
             IncrementCountCommand = new Command(onIncrementCount);
-            OverlayTappedCommand = new Command((o)=> 
-            { 
-                _wdtOverlay.Cancel(); OverlayVisible = false; 
-            } );
+            OverlayTappedCommand = new Command((o) => _wdtOverlay.Cancel());
         }
-        public ICommand SetCountCommand { get; private set; }
         public ICommand IncrementCountCommand { get; private set; }
         private void onIncrementCount(object o)
         {
@@ -38,13 +40,14 @@ namespace EntryWithWDT
 
                 // Show overlay briefly
                 _wdtOverlay.StartOrRestart(
-                    initialAction: () => OverlayVisible = true, 
-                    completeAction: () =>OverlayVisible = false);
+                    initialAction: () => OverlayVisible = true,
+                    completeAction: () => OverlayVisible = false);
             });
         }
         public ICommand OverlayTappedCommand { get; private set; }
 
         WatchdogTimer _wdtCount = new WatchdogTimer { Interval = TimeSpan.FromSeconds(0.5) };
+
         Stopwatch _stopwatch;
         public string ButtonText
         {
@@ -135,7 +138,8 @@ namespace EntryWithWDT
 
         // <PackageReference Include="IVSoftware.Portable.WatchdogTimer" Version="1.2.1" />
         WatchdogTimer _wdtEntry = new WatchdogTimer { Interval = TimeSpan.FromSeconds(1) };
-        WatchdogTimer _wdtOverlay = new WatchdogTimer { Interval = TimeSpan.FromSeconds(2.5) };
+        WatchdogTimer _wdtOverlay = null;
+
         private string GenerateFilterCommand()
         {
             var where = string.Join(
