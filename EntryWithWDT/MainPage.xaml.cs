@@ -19,7 +19,10 @@ namespace EntryWithWDT
         public MainPageBindingContext()
         {
             IncrementCountCommand = new Command(onIncrementCount);
-            OverlayTappedCommand = new Command((o)=>_wdtOverlay.Cancel());
+            OverlayTappedCommand = new Command((o)=> 
+            { 
+                _wdtOverlay.Cancel(); OverlayVisible = false; 
+            } );
         }
         public ICommand SetCountCommand { get; private set; }
         public ICommand IncrementCountCommand { get; private set; }

@@ -34,7 +34,7 @@
             RowDefinitions="*,Auto,*"
             InputTransparent="False">
             <Grid.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding OverlayTapped}" />
+                <TapGestureRecognizer Command="{Binding OverlayTappedCommand}" />
             </Grid.GestureRecognizers>
             <Label 
                 Text="{Binding OverlayText}"
