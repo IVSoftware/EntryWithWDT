@@ -1,9 +1,6 @@
 ﻿using IVSoftware.Portable;
-using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Net.Http.Headers;
-using System.Net.WebSockets;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -133,10 +130,9 @@ namespace EntryWithWDT
         }
         string _entryText = string.Empty;
 
-
         // <PackageReference Include="IVSoftware.Portable.WatchdogTimer" Version="1.2.1" />
-        WatchdogTimer _wdtEntry = new WatchdogTimer { Interval = TimeSpan.FromSeconds(1) };
-        WatchdogTimer _wdtOverlay = new WatchdogTimer { Interval = TimeSpan.FromSeconds(3) };
+        WatchdogTimer _wdtEntry = new WatchdogTimer { Interval = TimeSpan.FromSeconds(5) };
+        WatchdogTimer _wdtOverlay = new WatchdogTimer { Interval = TimeSpan.FromSeconds(10) };
         private string GenerateFilterCommand()
         {
             var where = string.Join(
