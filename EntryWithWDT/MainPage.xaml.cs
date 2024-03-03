@@ -131,8 +131,8 @@ namespace EntryWithWDT
         string _entryText = string.Empty;
 
         // <PackageReference Include="IVSoftware.Portable.WatchdogTimer" Version="1.2.1" />
-        WatchdogTimer _wdtEntry = new WatchdogTimer { Interval = TimeSpan.FromSeconds(5) };
-        WatchdogTimer _wdtOverlay = new WatchdogTimer { Interval = TimeSpan.FromSeconds(10) };
+        WatchdogTimer _wdtEntry = new WatchdogTimer { Interval = TimeSpan.FromSeconds(1) };
+        WatchdogTimer _wdtOverlay = new WatchdogTimer { Interval = TimeSpan.FromSeconds(2.5) };
         private string GenerateFilterCommand()
         {
             var where = string.Join(
